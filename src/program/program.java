@@ -1,3 +1,5 @@
+package program;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -37,9 +39,13 @@ public class program {
                 players.get(secondPlayer).resetHp();
                 players.remove(firstPlayer);
             }
-            System.out.println(" всех отпиздил. Молодец!");
-            System.out.println();
+            if (players.size() == 1){
+                System.out.println(" всех отпиздил, красавчик!");
+                System.out.println();
+            } else {System.out.println(" отпиздил своего оппонента!");
+                System.out.println();}
         }
+        scanner.close();
     }
 
 

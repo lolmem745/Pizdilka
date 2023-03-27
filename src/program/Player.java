@@ -1,15 +1,8 @@
-/*Создать класс Player с полями id (long), name (String), damage (double) healthPoint (hp) (double)
-У класса должен быть конструктор, который принимает только name.
-Идентификатор присваивается автоматически из последовательности (1, 2, ...)
-Каждый класс должен уметь "бить" другого Player'а void attack(Player player) -> player1.attack(player2)
-Внутри метода игрок, на котором вызван метод уменьшает здоровье игрока, который передан в метод
-Придумать несколько классов с разными параметрами жизней и атаки по-умолчанию Player player = new Tank("name");
-        * Придумать, все, что захочется и обогатить проект
-        Понасоздавать объектов и стравить их друг с другом*/
+package program;
 
 import java.util.Random;
 
-public class Player {
+public class Player implements HaveHealthPoints{
     protected static long playerId;
     private final long id;
     protected String name;
@@ -35,7 +28,7 @@ public class Player {
             System.out.println();
             System.out.println("Зачем бить труп " + player.name + ". Не издевайтесь над телами погибших, пожалуйста.");
         } else {
-            double damage = this.damage*random.nextInt(60,101)/100;
+            double damage = this.damage * random.nextInt(60, 101) / 100;
             player.hp -= damage;
             if (player.isDead()) {
                 System.out.println(player.name + " совсем ослаб и умер, получив " + String.format("%.2f", damage) + " урона");
@@ -44,7 +37,9 @@ public class Player {
                 System.out.println("У " + player.name + " осталось " + String.format("%.1f", player.hp));
             }
         }
-
+        Render render = new Render();
+        render.viewBar(player);
+        System.out.println();
     }
     public boolean isDead()
     {
@@ -54,4 +49,13 @@ public class Player {
     {
         this.hp = maxHp;
     }
+    @Override
+    public double getMaxHealthPoints() {
+        return this.maxHp;
+    }
+
+    public double getCurrentHealthPoints() {
+        return this.hp;
+    }
 }
+
